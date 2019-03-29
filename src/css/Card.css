@@ -1,8 +1,8 @@
 .ui.grid {
   padding-top: 10rem;
   padding-bottom: 5rem;
-  padding-left: 10rem;
-  padding-right: 10rem;
+  padding-left: 12.5rem;
+  padding-right: 12.5rem;
   background-color: rgb(250,250,250);
 }
 
@@ -12,9 +12,10 @@
 
 .ui.card.column.segment {
   height: 300px;
-  width: 150px;
   text-align: center;
   flex-direction: initial;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .description{

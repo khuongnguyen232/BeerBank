@@ -13,12 +13,16 @@ class BeerCard extends React.Component {
      this.setState({ showModal: false });
    }
 
+   componentDidMount() {
+    ReactModal.setAppElement('body');
+ }
+
 render() {
   return(
       <div className="ui card column segment" >
         <button className ="ui card column" onClick={this.handleOpenModal}>
           <div className="image">
-            <img src = {this.props.beer.image_url} alt = {this.props.beer.image_url.name}/>
+            <img src = {this.props.beer.image_url} alt = {this.props.beer.name}/>
           </div>
 
           <div className="description">
@@ -31,9 +35,9 @@ render() {
           </div>
         </button>
 
-        <ReactModal isOpen={this.state.showModal} contentLabel="Beer PopUp">
+        <ReactModal className = "modal" isOpen={this.state.showModal} contentLabel="Beer PopUp">
+              <button className= "close-button" onClick={this.handleCloseModal}>Close Modal</button>
               <Popup {...this.props}/>
-              <button onClick={this.handleCloseModal}>Close Modal</button>
         </ReactModal>
       </div>
     );

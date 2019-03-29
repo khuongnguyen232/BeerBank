@@ -2,7 +2,8 @@ import React from 'react';
 import SearchBar from './components/SearchBar.js';
 import BeerList from './components/BeerList.js';
 import Axios from 'axios';
-import './components/Card.css'
+import './css/Card.css';
+import './css/popup.css';
 
 class App extends React.Component {
   state = {

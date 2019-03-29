@@ -1,0 +1,56 @@
+.modal {
+  position: absolute;
+  width: 35%;
+  height: 80%;
+  margin: 5% 25% -20% 25%;
+  background-color: white;
+  border-radius: 5px;
+}
+
+.close-button {
+  float: right;
+}
+
+.flex-container {
+  margin-top: 5%;
+  float: left;
+  display: flex;
+}
+
+.flex-container > .image-pop {
+  width: 25%;
+  height: 60%;
+  margin: 0 2% 0 2%;
+}
+
+.info-pop {
+  float: left;
+  padding-right: 5%;
+}
+
+.info-pop > h3 {
+  margin-bottom: 2%;
+}
+
+.info-pop > h3 {
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+
+.info-pop > .line {
+  width: 25%;
+  height: 1%;
+  background-color: purple;
+}
+
+strong > span {
+  font-weight: normal;
+  font-style: italic;
+  padding-left: 1%;
+  padding-right: 5%;
+}
+
+.list {
+  padding-left: 5%;
+  padding-right: 1%;
+}
