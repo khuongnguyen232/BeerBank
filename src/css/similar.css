@@ -1,0 +1,28 @@
+.wrap {
+  display: contents;
+}
+
+.similar{
+    display: inline-block;
+    width: 100%;
+}
+
+.similar-card {
+  width: 32%;
+  padding-left: auto;
+  padding-right: auto;
+  background-color: white;
+  margin: auto;
+}
+
+.similar-image {
+  background-color: white;
+  padding: 0 0 0 0;
+}
+
+.similar-image>img {
+  position: relative;
+  width:30px;
+  height:100px;
+  margin: 0 auto 10px auto;
+}

@@ -1,3 +1,8 @@
+.popup-container {
+  display: block;
+  float: left;
+}
+
 .modal {
   position: absolute;
   width: 35%;

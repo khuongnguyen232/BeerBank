@@ -4,6 +4,7 @@ import BeerList from './components/BeerList.js';
 import Axios from 'axios';
 import './css/Card.css';
 import './css/popup.css';
+import './css/similar.css';
 
 class App extends React.Component {
   state = {
@@ -12,7 +13,8 @@ class App extends React.Component {
     page : 1
   }
   getBeerOnSearch = async (term) => {
-    let beerResult = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
+    let beerResult;
+    beerResult = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
     //console.log(beerResult);
   }
 

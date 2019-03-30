@@ -3,8 +3,10 @@ import ReactModal from 'react-modal';
 import Popup from './Popup.js';
 import Axios from 'axios';
 
+//use beer props to reduce the traffic to the API server when test
+
 class PopUpCard extends React.Component {
-  state = {showModal:false , beer: null};
+  state = {showModal:false , beer: this.props.beer};
 
   handleOpenModal = () => {
      this.setState({ showModal: true });
@@ -16,8 +18,8 @@ class PopUpCard extends React.Component {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    Axios.get("https://api.punkapi.com/v2/beers/random")
-    .then((response) => {this.setState({beer: response.data[0]})});
+    //Axios.get("https://api.punkapi.com/v2/beers/random")
+    //.then((response) => {this.setState({beer: response.data[0]})});
   }
 
 renderCard = () => {
@@ -28,8 +30,9 @@ renderCard = () => {
     }
 
     return (
-        <button className ="" onClick={this.handleOpenModal}>
-          <div className="">
+      <div className="wrap">
+        <button className ="similar-card" onClick={this.handleOpenModal}>
+          <div className="similar-image">
             <img src = {this.state.beer.image_url} alt = {this.state.beer.name}/>
           </div>
 
@@ -38,17 +41,19 @@ renderCard = () => {
           </div>
         </button>
 
-        /*<ReactModal className = "modal" isOpen={this.state.showModal} contentLabel="Beer PopUp">
+        <ReactModal className = "modal" isOpen={this.state.showModal} contentLabel="Beer PopUp">
               <button className= "close-button" onClick={this.handleCloseModal}>Close Modal</button>
               <Popup beer = {this.state.beer} />
-        </ReactModal>*/
+        </ReactModal>
+      </div>
+
       )
 
 };
 
 render() {
   return (
-    <div className = "#">
+    <div className = "wrap">
       {this.renderCard()}
     </div>
     );

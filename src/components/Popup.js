@@ -25,7 +25,7 @@ const Popup = (props) => {
       <div className = "similar-container">
         <h1>You Might Also Like:</h1>
         <div className = "similar">
-          <PopUpCard {...props}/>
+          <PopUpCard {...props}/> <PopUpCard {...props}/> <PopUpCard {...props}/>
         </div>
       </div>
     </div>
