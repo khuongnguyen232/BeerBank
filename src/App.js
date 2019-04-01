@@ -8,20 +8,27 @@ import './css/similar.css';
 
 class App extends React.Component {
   state = {
-    beerCount : 0,
     beers : [],
-    page : 1
+    fav: [],
+    page : 1,
+    displaySearch:false
   }
   getBeerOnSearch = async (term) => {
     let beerResult;
-    beerResult = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
-    //console.log(beerResult);
+    if(term === '')
+    {
+        beerResult = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
+    } else {
+        beerResult = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
+    }
+
+    this.setState({beers:beerResult.data});
+    //console.log(this.state.beers);
   }
 
   getAllBeer = async () => {
     let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
     this.setState({beers:allBeers.data});
-    this.setState({beerCount:allBeers.data.length});
     //console.log("From getAllBeer: " + this.state.beerCount);
   }
 
@@ -29,7 +36,8 @@ class App extends React.Component {
     return (
       <div>
         <SearchBar getBeer = {this.getBeerOnSearch} />
-        <BeerList loadBeer = {this.getAllBeer} allBeer = {this.state.beers} />
+        <BeerList allBeer = {this.state.beers} />
+        Found : {this.state.beers.length} beers
       </div>
     );
   };
