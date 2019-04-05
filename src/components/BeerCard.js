@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import Popup from './Popup.js';
+import starimage from '../icon/star.png'
 
 class BeerCard extends React.Component {
-  state = {showModal:false};
+  state = {showModal:false, isFavorite:false};
 
   handleOpenModal = () => {
      this.setState({ showModal: true });
@@ -13,17 +14,28 @@ class BeerCard extends React.Component {
      this.setState({ showModal: false });
    }
 
+   //get the callback function to add favorite
+   onClickFavorite = () => {
+     let toogleFavorite = !this.state.isFavorite;
+     this.setState({isFavorite:toogleFavorite});
+
+     this.props.modifyFavoriteList(this.state.isFavorite,this.props.beer);
+   }
+
    componentDidMount() {
     ReactModal.setAppElement('body');
  }
 
 render() {
   return(
-      <div className="ui card column segment" >
+      <div className="ui card column segment" key = {this.props.beer.id}>
+        <button className="star-button" onClick = {this.onClickFavorite}>
+            <img className = "star-image" src = {starimage} alt = "Star"/>
+        </button>
+        <div className="image">
+          <img src = {this.props.beer.image_url} alt = {this.props.beer.name}/>
+        </div>
         <button className ="ui card column" onClick={this.handleOpenModal}>
-          <div className="image">
-            <img src = {this.props.beer.image_url} alt = {this.props.beer.name}/>
-          </div>
 
           <div className="description">
             <div className="configName">

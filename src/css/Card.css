@@ -1,3 +1,14 @@
+.star-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.star-image {
+  width: 10px;
+  height: 10px;
+}
+
 .ui.grid {
   padding-top: 10rem;
   padding-bottom: 5rem;

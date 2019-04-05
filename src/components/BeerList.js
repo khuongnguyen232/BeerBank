@@ -4,12 +4,20 @@ import BeerCard from './BeerCard.js';
 class BeerList extends React.Component {
   state = {beers : []};
 
-  //use this function when we have an update
+  
+  componentWillMount(){
+    let list = this.props.allBeer.map((beer) => {
+      return <BeerCard key = {beer.id} beer = {beer} modifyFavoriteList = {this.props.modifyFavoriteList}/>
+    });
+    this.setState({beers:list});
+  }
+
+  //use this function when we have an update from parent App
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
       //await this.props.loadBeer();
       let list = this.props.allBeer.map((beer) => {
-        return <BeerCard key = {beer.id} beer = {beer}/>
+        return <BeerCard key = {beer.id} beer = {beer} modifyFavoriteList = {this.props.modifyFavoriteList}/>
       });
       this.setState({beers:list});
     }

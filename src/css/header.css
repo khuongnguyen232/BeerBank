@@ -1,0 +1,16 @@
+.ui.segment.header {
+  background-color: orange;
+}
+
+.menu {
+  width: 100%;
+  position: fixed;
+  left: 0;
+  top:0;
+  background-color: orange;
+  z-index: +1;
+}
+
+.right-button{
+  float: right;
+}

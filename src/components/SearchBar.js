@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 class SearchBar extends React.Component {
   state = {findBeer : ''};
@@ -15,7 +16,11 @@ class SearchBar extends React.Component {
 
   render() {
     return(
-      <div className = "ui segment">
+      <div className = "ui segment header">
+        <div className = "menu">
+          <Link to="/favorite"><button className = "right-button" type = "button">Favorite</button></Link>
+          <Link to="/"><button className = "right-button" type = "button">Home</button></Link>
+        </div>
         <form className = "ui form" onSubmit = {this.onFormSubmit}>
           <h1 className = "ui center aligned icon header"> BEER BANK </h1>
           <span className = "ui center aligned icon header" >Find your favorite beer here</span>
