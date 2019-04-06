@@ -13,4 +13,28 @@
 
 .right-button{
   float: right;
+  background-color: inherit;
+  border: 0;
+  color: white;
+  font-size: 16px;
+}
+
+.ui.center.aligned.icon.header.title {
+  color: white;
+  word-spacing: 5px;
+  letter-spacing: 1px;
+  font-size: 35px;
+  margin-bottom: -5px;
+}
+
+.ui.center.aligned.icon.header.info {
+  margin: 10px 0 10px 0;
+  color: white;
+  opacity: 0.75;
+  font-weight: 400;
+}
+
+.ui.form input[type = text]{
+  width: 40%;
+  margin: 0 30% 0 30%;
 }

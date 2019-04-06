@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import Popup from './Popup.js';
-import starimage from '../icon/star.png'
 
 class BeerCard extends React.Component {
   state = {showModal:false, isFavorite:false};
@@ -30,7 +29,8 @@ render() {
   return(
       <div className="ui card column segment" key = {this.props.beer.id}>
         <button className="star-button" onClick = {this.onClickFavorite}>
-            <img className = "star-image" src = {starimage} alt = "Star"/>
+            {this.state.isFavorite === false && <i className="far fa-star"></i>}
+            {this.state.isFavorite === true && <i className="fas fa-star"></i>}
         </button>
         <div className="image">
           <img src = {this.props.beer.image_url} alt = {this.props.beer.name}/>

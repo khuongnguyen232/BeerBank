@@ -18,12 +18,12 @@ class SearchBar extends React.Component {
     return(
       <div className = "ui segment header">
         <div className = "menu">
-          <Link to="/favorite"><button className = "right-button" type = "button">Favorite</button></Link>
-          <Link to="/"><button className = "right-button" type = "button">Home</button></Link>
+          <Link to="/favorite"><button className = "right-button" type = "button">FAVORITE</button></Link>
+          <Link to="/"><button className = "right-button" type = "button">HOME</button></Link>
         </div>
         <form className = "ui form" onSubmit = {this.onFormSubmit}>
-          <h1 className = "ui center aligned icon header"> BEER BANK </h1>
-          <span className = "ui center aligned icon header" >Find your favorite beer here</span>
+          <h1 className = "ui center aligned icon header title"> The Beer Bank </h1>
+          <span className = "ui center aligned icon header info" >Find your favorite beer here</span>
           <input
             className = "ui input error" type = "text"
             placeholder = "Find your favorite beer here"

@@ -2,11 +2,12 @@
     position: absolute;
     top: 0;
     right: 0;
+    background-color: white;
+    border: 0;
 }
 
-.star-image {
-  width: 10px;
-  height: 10px;
+.fas.fa-star {
+  color: orange;
 }
 
 .ui.grid {
