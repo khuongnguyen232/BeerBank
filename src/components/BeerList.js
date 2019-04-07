@@ -10,8 +10,10 @@ const BeerList = (props) => {
     return<div>Loading ...</div>;
   }
   return (
-      <div className = "ui three column grid">
-        {list}
+      <div className = "ui three column doubling stackable grid">
+        <div className = "ui row">
+          {list}
+        </div>
       </div>
     )
 };

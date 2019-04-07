@@ -15,13 +15,14 @@ class App extends React.Component {
     page : 1,
     displaySearch:false
   }
+
   getBeerOnSearch = async (term) => {
     let beerResult;
     if(term === '')
     {
-        beerResult = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
+        beerResult = this.getAllBeer();
     } else {
-        beerResult = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
+        beerResult = this.getAllBeerSearch();
     }
 
     this.setState({beers:beerResult.data});
@@ -29,26 +30,41 @@ class App extends React.Component {
 
   getAllBeer = async () => {
     let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
-    this.setState({beers:allBeers.data});
-    //console.log("From getAllBeer: " + this.state.beerCount);
+    //add isFavorite prop here, easy to handle Favorite
+    //console.log(allBeers);
+    for(let i = 0; i < allBeers.data.length; ++i){
+      allBeers.data[i].isFavorite = false;
+    }
+    return allBeers;
   }
 
-  modifyFavoriteList = (isFavorite, beer) => {
-    if(isFavorite)
+  getAllBeerSearch = async (term) => {
+    let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
+    //add isFavorite prop here, easy to handle Favorite
+    for(let i = 0; i < allBeers.data.length; ++i){
+      allBeers.data[i].isFavorite = false;
+    }
+    return allBeers;
+  }
+
+  //isFavorite is a state in BeerCard - add to favs beer if not exist, else remove it
+  modifyFavoriteList = (beer) => {
+    if(beer.isFavorite)
     {
-      console.log("implement remove later");
+      let result = this.state.favs.filter(fav => {
+        return fav.id !== beer.id;
+      })
+      this.setState({favs:result});
     } else {
       let current = this.state.favs;
       current.push(beer);
       this.setState({favs:current});
     }
-    console.log("Favorite list: " + this.state.favs);
   }
 
   async componentDidMount() {
-      let beerResult = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
+      let beerResult = await this.getAllBeer();
       this.setState({beers:beerResult.data});
-      console.log("App-componentDidMount");
   }
 
   render() {

@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import Popup from './Popup.js';
 
 class BeerCard extends React.Component {
-  state = {showModal:false, isFavorite:false};
+  state = {showModal:false};
 
   handleOpenModal = () => {
      this.setState({ showModal: true });
@@ -15,22 +15,22 @@ class BeerCard extends React.Component {
 
    //get the callback function to add favorite
    onClickFavorite = () => {
-     let toogleFavorite = !this.state.isFavorite;
-     this.setState({isFavorite:toogleFavorite});
-
-     this.props.modifyFavoriteList(this.state.isFavorite,this.props.beer);
+     this.props.modifyFavoriteList(this.props.beer);
+     let toogleFavorite = !this.props.beer.isFavorite;
+     this.props.beer.isFavorite = toogleFavorite;
    }
 
    componentDidMount() {
     ReactModal.setAppElement('body');
+    //console.log(this.props.beer.isFavorite);
  }
 
 render() {
   return(
       <div className="ui card column segment" key = {this.props.beer.id}>
         <button className="star-button" onClick = {this.onClickFavorite}>
-            {this.state.isFavorite === false && <i className="far fa-star"></i>}
-            {this.state.isFavorite === true && <i className="fas fa-star"></i>}
+            {this.props.beer.isFavorite === false && <i className="far fa-star"></i>}
+            {this.props.beer.isFavorite === true && <i className="fas fa-star"></i>}
         </button>
         <div className="image">
           <img src = {this.props.beer.image_url} alt = {this.props.beer.name}/>
