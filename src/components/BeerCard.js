@@ -15,9 +15,9 @@ class BeerCard extends React.Component {
 
    //get the callback function to add favorite
    onClickFavorite = () => {
-     this.props.modifyFavoriteList(this.props.beer);
      let toogleFavorite = !this.props.beer.isFavorite;
      this.props.beer.isFavorite = toogleFavorite;
+     this.props.modifyFavoriteList(this.props.beer);
    }
 
    componentDidMount() {

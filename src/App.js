@@ -31,9 +31,14 @@ class App extends React.Component {
   getAllBeer = async () => {
     let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
     //add isFavorite prop here, easy to handle Favorite
-    //console.log(allBeers);
+
+    let currentFav = localStorage.getItem('favorite');
+    currentFav = currentFav === null ? []:JSON.parse(currentFav);
+
     for(let i = 0; i < allBeers.data.length; ++i){
       allBeers.data[i].isFavorite = false;
+      if(currentFav.some(fav => fav.id === allBeers.data[i].id))
+        allBeers.data[i].isFavorite = true;
     }
     return allBeers;
   }
@@ -48,23 +53,37 @@ class App extends React.Component {
   }
 
   //isFavorite is a state in BeerCard - add to favs beer if not exist, else remove it
-  modifyFavoriteList = (beer) => {
-    if(beer.isFavorite)
+  modifyFavoriteList = async (beer) => {
+    if(!beer.isFavorite)
     {
-      let result = this.state.favs.filter(fav => {
+      let current = this.state.favs.filter(fav => {
         return fav.id !== beer.id;
       })
-      this.setState({favs:result});
+      await this.setState({favs:current});
     } else {
       let current = this.state.favs;
+      //this if statement to support localStorage, in case the list is null
+      if(current === null)
+        current = [];
+
       current.push(beer);
-      this.setState({favs:current});
+      await this.setState({favs:current});
     }
+    this.updateLocalStorage();
+  }
+
+  updateLocalStorage = () => {
+    console.log(this.state.favs);
+    localStorage.setItem('favorite',JSON.stringify(this.state.favs));
   }
 
   async componentDidMount() {
+      //currentFav will be a string
+      let currentFav = localStorage.getItem('favorite');
+      currentFav = currentFav === null ? []:JSON.parse(currentFav);
+
       let beerResult = await this.getAllBeer();
-      this.setState({beers:beerResult.data});
+      this.setState({beers:beerResult.data, favs:currentFav});
   }
 
   render() {
