@@ -48,7 +48,7 @@ render() {
         </button>
 
         <ReactModal className = "modal" isOpen={this.state.showModal} contentLabel="Beer PopUp">
-              <button className= "close-button" onClick={this.handleCloseModal}>Close Modal</button>
+              <button className= "close-button" onClick={this.handleCloseModal}><i class="fas fa-times"></i></button>
               <Popup {...this.props}/>
         </ReactModal>
       </div>

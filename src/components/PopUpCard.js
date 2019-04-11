@@ -18,12 +18,11 @@ class PopUpCard extends React.Component {
 
   componentDidMount() {
     ReactModal.setAppElement('body');
-    //Axios.get("https://api.punkapi.com/v2/beers/random")
-    //.then((response) => {this.setState({beer: response.data[0]})});
+    Axios.get("https://api.punkapi.com/v2/beers/random")
+    .then((response) => {this.setState({beer: response.data[0]})});
   }
 
 renderCard = () => {
-    console.log(this.state.beer);
     if(this.state.beer == null)
     {
       return <div>Loading for data ...</div>;
@@ -40,15 +39,13 @@ renderCard = () => {
             {this.state.beer.name}
           </div>
         </button>
-
+        
         <ReactModal className = "modal" isOpen={this.state.showModal} contentLabel="Beer PopUp">
-              <button className= "close-button" onClick={this.handleCloseModal}>Close Modal</button>
               <Popup beer = {this.state.beer} />
         </ReactModal>
+
       </div>
-
       )
-
 };
 
 render() {

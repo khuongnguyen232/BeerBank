@@ -3,7 +3,7 @@ import PopUpCard from './PopUpCard';
 
 const Popup = (props) => {
 
-  const food_pairing = props.beer.food_pairing.map((food) => {return <li className ="list">{food}</li>} );
+  const food_pairing = props.beer.food_pairing.map((food) => {return <li className ="list" key ={food}> {food}</li>} );
 
   return (
     <div className = "popup-container">
