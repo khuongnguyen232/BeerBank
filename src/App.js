@@ -13,7 +13,9 @@ class App extends React.Component {
     beers : [],
     favs: [],
     page : 1,
-    displaySearch:false
+    hasMoreItem:true,
+    error:false,
+    isLoading:false
   }
 
   getBeerOnSearch = async (term) => {
@@ -29,7 +31,7 @@ class App extends React.Component {
   }
 
   getAllBeer = async () => {
-    let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page" + this.state.page);
+    let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page=" + this.state.page);
     //add isFavorite prop here, easy to handle Favorite
 
     let currentFav = localStorage.getItem('favorite');
@@ -73,8 +75,18 @@ class App extends React.Component {
   }
 
   updateLocalStorage = () => {
-    console.log(this.state.favs);
     localStorage.setItem('favorite',JSON.stringify(this.state.favs));
+  }
+
+  addMoreBeer = async () => {
+    let currentList = this.state.beers;
+    let nextPage = this.state.page + 1;
+    this.setState({page:this.state.page + 1}, async () => {
+      let moreBeer = await this.getAllBeer();
+      this.setState({beers:currentList.concat(moreBeer.data)});
+    });
+
+
   }
 
   async componentDidMount() {
@@ -92,6 +104,7 @@ class App extends React.Component {
         <SearchBar getBeer = {this.getBeerOnSearch} />
           <Route exact path='/' render = {() => {return(<BeerList allBeer = {this.state.beers} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
           <Route exact path='/favorite' render = {() => {return(<BeerList allBeer = {this.state.favs} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
+          <button className = "button" onClick = {this.addMoreBeer}>LoadMore</button>
       </div>
     );
   };
