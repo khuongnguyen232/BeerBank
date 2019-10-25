@@ -19,16 +19,16 @@ class App extends React.Component {
     let beerResult;
     if(term === '')
     {
-        beerResult = this.getAllBeer();
+        beerResult = await this.getAllBeer();
     } else {
-        beerResult = this.getAllBeerSearch();
+        beerResult = await this.getAllBeerSearch(term);
     }
 
     this.setState({beers:beerResult.data});
   }
 
   getAllBeer = async () => {
-    let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?per_page=12&page=" + this.state.page);
+    let allBeers = await Axios.get(`https://api.punkapi.com/v2/beers?per_page=12&page=${this.state.page}`);
     //add isFavorite prop here, easy to handle Favorite
 
     let currentFav = localStorage.getItem('favorite');
@@ -43,11 +43,12 @@ class App extends React.Component {
   }
 
   getAllBeerSearch = async (term) => {
-    let allBeers = await Axios.get("https://api.punkapi.com/v2/beers?beer_name=" + term);
+    let allBeers = await Axios.get(`https://api.punkapi.com/v2/beers?beer_name=${term}`);
     //add isFavorite prop here, easy to handle Favorite
     for(let i = 0; i < allBeers.data.length; ++i){
       allBeers.data[i].isFavorite = false;
     }
+
     return allBeers;
   }
 
@@ -81,8 +82,6 @@ class App extends React.Component {
       let moreBeer = await this.getAllBeer();
       this.setState({beers:currentList.concat(moreBeer.data)});
     });
-
-
   }
 
   async componentDidMount() {
@@ -95,12 +94,13 @@ class App extends React.Component {
   }
 
   render() {
+    console.log(this.state.beers)
     return (
       <div>
-        <SearchBar getBeer = {this.getBeerOnSearch} />
-          <Route exact path='/' render = {() => {return(<BeerList allBeer = {this.state.beers} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
-          <Route exact path='/favorite' render = {() => {return(<BeerList allBeer = {this.state.favs} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
-          <button className = "ui inverted orange button" onClick = {this.addMoreBeer}>LoadMore</button>
+        <SearchBar getBeerOnSearch = {this.getBeerOnSearch} />
+        <Route exact path='/' render = {() => {return(<BeerList allBeer = {this.state.beers} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
+        <Route exact path='/favorite' render = {() => {return(<BeerList allBeer = {this.state.favs} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
+        <button className = "ui inverted orange button" onClick = {this.addMoreBeer}>LoadMore</button>
       </div>
     );
   };

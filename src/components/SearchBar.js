@@ -6,11 +6,11 @@ class SearchBar extends React.Component {
 
   onFormSubmit = (event) => {
     event.preventDefault();
-    //this.setState({findBeer:event.target.value});
-    this.props.getBeer(this.state.findBeer);
   }
 
   onInputChange = (event) => {
+    console.log(event.target.value);
+    this.props.getBeerOnSearch(event.target.value);
     this.setState({findBeer:event.target.value});
   }
 
