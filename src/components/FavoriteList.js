@@ -1,7 +1,7 @@
 import React from 'react';
 import BeerCard from './BeerCard.js';
 
-const BeerList = (props) => {
+const FavoriteList = (props) => {
   if(!props.allBeer) {
     return <div>Loading Data ... </div>;
   };
@@ -15,9 +15,8 @@ const BeerList = (props) => {
         <div className = "ui row">
           {list}
         </div>
-        <button className = "ui inverted orange button" onClick = {props.addMoreBeer}>LoadMore</button>
       </div>
     )
 };
 
-export default BeerList;
+export default FavoriteList;

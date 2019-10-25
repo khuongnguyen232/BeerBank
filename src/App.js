@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
+
+import FavoriteList from './components/FavoriteList.js';
 import SearchBar from './components/SearchBar.js';
 import BeerList from './components/BeerList.js';
 import Axios from 'axios';
@@ -98,9 +100,8 @@ class App extends React.Component {
     return (
       <div>
         <SearchBar getBeerOnSearch = {this.getBeerOnSearch} />
-        <Route exact path='/' render = {() => {return(<BeerList allBeer = {this.state.beers} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
-        <Route exact path='/favorite' render = {() => {return(<BeerList allBeer = {this.state.favs} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
-        <button className = "ui inverted orange button" onClick = {this.addMoreBeer}>LoadMore</button>
+        <Route exact path='/' render = {() => {return(<BeerList allBeer = {this.state.beers} modifyFavoriteList = {this.modifyFavoriteList} addMoreBeer={this.addMoreBeer}/>)}}/>
+        <Route exact path='/favorite' render = {() => {return(<FavoriteList allBeer = {this.state.favs} modifyFavoriteList = {this.modifyFavoriteList}/>)}}/>
       </div>
     );
   };
